@@ -4,14 +4,15 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import com.mackhartley.temptracker.data.models.Fever
 import kotlinx.coroutines.flow.Flow
 
 @Dao
-interface TempDao {
+interface AppDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertTempCollection(tempCollection: TempCollection)
+    suspend fun insertTempCollection(fever: Fever)
 
-    @Query("SELECT * FROM temp_collection ORDER BY datetime(dateTime) DESC")
-    fun getAllTempCollections(): Flow<List<TempCollection>>
+    @Query("SELECT * FROM fever ORDER BY datetime(dateTime) DESC")
+    suspend fun getAllFevers(): List<Fever>
 }

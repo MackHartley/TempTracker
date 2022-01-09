@@ -1,12 +1,12 @@
-package com.mackhartley.temptracker.data
+package com.mackhartley.temptracker.data.models
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import org.threeten.bp.OffsetDateTime
 
-@Entity(tableName = "temp_log")
-data class TempLog(
+@Entity(tableName = "fever")
+class Fever (
     @PrimaryKey(autoGenerate = true) val id: Int,
-    val datetime: OffsetDateTime,
-    val temp: Double
+    val dateTime: OffsetDateTime,
+    val name: String
 )
