@@ -12,6 +12,8 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavDirections
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.mackhartley.temptracker.data.FeversRepo
 import com.mackhartley.temptracker.databinding.FragmentFeversBinding
 import com.mackhartley.temptracker.findNavController
@@ -27,6 +29,7 @@ class FeversFragment : Fragment() {
     @Inject
     lateinit var modelFactory: ViewModelProvider.Factory
     lateinit var feversViewModel: FeversViewModel
+    lateinit var feversAdapter: FeversListAdapter
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -41,24 +44,36 @@ class FeversFragment : Fragment() {
     ): View? {
         val newBinding = FragmentFeversBinding.inflate(inflater, container, false)
         binding = newBinding
+        initRV()
         return newBinding.root
+    }
+
+    private fun initRV() {
+        binding?.let {
+            with(it.feversRv) {
+                layoutManager = LinearLayoutManager(activity)
+                feversAdapter = FeversListAdapter()
+                adapter = feversAdapter
+            }
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         binding?.let {
-            it.something.setOnClickListener {
-                feversViewModel.retrieveFevers()
-            }
             it.addFeverFab.setOnClickListener {
                 feversViewModel.addFever()
+                feversViewModel.retrieveFevers()
             }
+
         }
 
-        feversViewModel.uiState.observe(viewLifecycleOwner) {
-            when (it) {
+        feversViewModel.uiState.observe(viewLifecycleOwner) { state ->
+            when (state) {
                 is FeversUIState.Content -> {
-                    binding?.let { it.dummy.text = "testtingsdf" }
+                    binding?.let {
+                        feversAdapter.submitList(state.fevers)
+                    }
                 }
                 FeversUIState.Error -> {
                     Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show()

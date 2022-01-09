@@ -79,4 +79,6 @@ dependencies {
     // Dagger hilt
 //    implementation 'com.google.dagger:hilt-android:2.40.5'
 //    annotationProcessor 'com.google.dagger:hilt-compiler:2.40.5'
+
+    implementation "androidx.cardview:cardview:1.0.0"
 }
