@@ -9,5 +9,13 @@
         android:id="@+id/feverFragment"
         android:name="com.mackhartley.temptracker.ui.fevers.FeversFragment"
         android:label="fragment_fever"
-        tools:layout="@layout/fragment_fevers" />
+        tools:layout="@layout/fragment_fevers" >
+        <action
+            android:id="@+id/action_feverFragment_to_addFeverDialog"
+            app:destination="@id/addFeverDialog" />
+    </fragment>
+    <dialog
+        android:id="@+id/addFeverDialog"
+        android:name="com.mackhartley.temptracker.ui.addFever.AddFeverDialog"
+        android:label="AddFeverDialog" />
 </navigation>

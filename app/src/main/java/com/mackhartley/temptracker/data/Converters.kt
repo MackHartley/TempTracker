@@ -1,6 +1,8 @@
 package com.mackhartley.temptracker.data
 
 import androidx.room.TypeConverter
+import com.mackhartley.temptracker.utils.toDBFormattedString
+import com.mackhartley.temptracker.utils.toOffsetDateTimeFromDBString
 import org.threeten.bp.OffsetDateTime
 import org.threeten.bp.format.DateTimeFormatter
 
@@ -14,15 +16,4 @@ class Converters {
     fun toDate(dateString: String): OffsetDateTime {
         return dateString.toOffsetDateTimeFromDBString()
     }
-}
-
-// Used for DB
-val isoFormatter: DateTimeFormatter = DateTimeFormatter.ISO_OFFSET_DATE_TIME
-
-fun OffsetDateTime.toDBFormattedString() : String {
-    return this.format(isoFormatter)
-}
-
-fun String.toOffsetDateTimeFromDBString() : OffsetDateTime {
-    return isoFormatter.parse(this, OffsetDateTime::from)
 }

@@ -6,7 +6,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mackhartley.temptracker.data.models.Fever
 import com.mackhartley.temptracker.usecases.RetrieveFeversUseCase
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -18,6 +20,10 @@ class FeversViewModel @Inject constructor(
     val uiState: LiveData<FeversUIState>
         get() = _uiState
 
+    private val _uiEvent = Channel<FeversUIEvent>()
+    val uiEvent: Flow<FeversUIEvent>
+        get() = _uiEvent.receiveAsFlow()
+
     fun retrieveFevers() {
         viewModelScope.launch {
             try {
@@ -27,6 +33,12 @@ class FeversViewModel @Inject constructor(
             } catch (exception: Exception) {
                 _uiState.value = FeversUIState.Error
             }
+        }
+    }
+
+    fun addFever() {
+        viewModelScope.launch {
+            _uiEvent.send(FeversUIEvent.NavigateToAddFeverUI)
         }
     }
 }

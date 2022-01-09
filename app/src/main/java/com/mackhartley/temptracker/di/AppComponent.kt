@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Context
 import com.mackhartley.temptracker.data.AppDao
 import com.mackhartley.temptracker.data.AppDataBase
+import com.mackhartley.temptracker.ui.addFever.AddFeverDialog
 import com.mackhartley.temptracker.ui.fevers.FeversFragment
 import com.squareup.anvil.annotations.ContributesTo
 import com.squareup.anvil.annotations.MergeComponent
@@ -43,4 +44,5 @@ class DataModule {
 @ContributesTo(AppScope::class)
 interface ComponentInterface {
     fun inject(feversFragment: FeversFragment)
+    fun inject(addFeverDialog: AddFeverDialog)
 }
