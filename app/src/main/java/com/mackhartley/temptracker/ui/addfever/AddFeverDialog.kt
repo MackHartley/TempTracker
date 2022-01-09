@@ -1,4 +1,4 @@
-package com.mackhartley.temptracker.ui.addFever
+package com.mackhartley.temptracker.ui.addfever
 
 import android.app.Dialog
 import android.content.Context
@@ -8,13 +8,13 @@ import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.mackhartley.temptracker.R
-import com.mackhartley.temptracker.databinding.AddFeverDialogBinding
+import com.mackhartley.temptracker.databinding.DialogAddFeverBinding
 import com.mackhartley.temptracker.getAppComponent
 import javax.inject.Inject
 
 class AddFeverDialog : DialogFragment() {
 
-    var binding: AddFeverDialogBinding? = null
+    var binding: DialogAddFeverBinding? = null
 
     @Inject
     lateinit var modelFactory: ViewModelProvider.Factory
@@ -30,7 +30,7 @@ class AddFeverDialog : DialogFragment() {
         val context = requireContext()
         val builder = MaterialAlertDialogBuilder(context)
 
-        val newBinding = AddFeverDialogBinding.inflate(LayoutInflater.from(context))
+        val newBinding = DialogAddFeverBinding.inflate(LayoutInflater.from(context))
         binding = newBinding
 
         binding?.let {

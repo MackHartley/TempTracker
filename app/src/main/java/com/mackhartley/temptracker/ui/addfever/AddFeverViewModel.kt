@@ -1,4 +1,4 @@
-package com.mackhartley.temptracker.ui.addFever
+package com.mackhartley.temptracker.ui.addfever
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

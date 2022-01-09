@@ -8,14 +8,27 @@
     <fragment
         android:id="@+id/feverFragment"
         android:name="com.mackhartley.temptracker.ui.fevers.FeversFragment"
-        android:label="fragment_fever"
-        tools:layout="@layout/fragment_fevers" >
+        android:label="@string/your_past_fevers"
+        tools:layout="@layout/fragment_fevers">
         <action
             android:id="@+id/action_feverFragment_to_addFeverDialog"
             app:destination="@id/addFeverDialog" />
+        <action
+            android:id="@+id/action_feverFragment_to_feverDetailsFragment"
+            app:destination="@id/feverDetailsFragment" />
     </fragment>
     <dialog
         android:id="@+id/addFeverDialog"
-        android:name="com.mackhartley.temptracker.ui.addFever.AddFeverDialog"
-        android:label="AddFeverDialog" />
+        android:name="com.mackhartley.temptracker.ui.addfever.AddFeverDialog"
+        android:label="AddFeverDialog"
+        tools:layout="@layout/dialog_add_fever" />
+    <fragment
+        android:id="@+id/feverDetailsFragment"
+        android:name="com.mackhartley.temptracker.ui.feverdetails.FeverDetailsFragment"
+        android:label="@string/fever_details"
+        tools:layout="@layout/fragment_fever_details" >
+        <argument
+            android:name="feverId"
+            app:argType="integer" />
+    </fragment>
 </navigation>

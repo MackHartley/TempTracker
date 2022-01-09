@@ -2,7 +2,7 @@ package com.mackhartley.temptracker.di
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.mackhartley.temptracker.ui.addFever.AddFeverViewModel
+import com.mackhartley.temptracker.ui.addfever.AddFeverViewModel
 import com.mackhartley.temptracker.ui.fevers.FeversViewModel
 import com.squareup.anvil.annotations.ContributesTo
 import dagger.Binds

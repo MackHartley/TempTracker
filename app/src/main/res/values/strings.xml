@@ -9,4 +9,6 @@
     <string name="cancel">Cancel</string>
     <string name="fever_on">Fever on </string>
     <string name="created_on">Created on </string>
+    <string name="your_past_fevers">Your Past Fevers</string>
+    <string name="fever_details">Fever Details</string>
 </resources>
