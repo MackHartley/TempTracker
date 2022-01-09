@@ -7,4 +7,6 @@
     <string name="new_fever_record">New Fever Record</string>
     <string name="add">Add</string>
     <string name="cancel">Cancel</string>
+    <string name="fever_on">Fever on </string>
+    <string name="created_on">Created on </string>
 </resources>

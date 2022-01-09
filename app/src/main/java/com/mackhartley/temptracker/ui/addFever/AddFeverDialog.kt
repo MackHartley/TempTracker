@@ -4,8 +4,6 @@ import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -36,7 +34,9 @@ class AddFeverDialog : DialogFragment() {
         binding = newBinding
 
         binding?.let {
-            val defaultName = viewModel.getDefaultFeverName()
+            val dateString = viewModel.getFeverDateString()
+            val defaultLabel = context.getString(viewModel.getDefaultFeverLabelRes())
+            val defaultName = "$defaultLabel $dateString"
             it.feverName.setText(defaultName)
         }
 

@@ -33,8 +33,10 @@ class FeversListAdapter : ListAdapter<Fever, FeversListAdapter.FeverVH>(FeverIte
         init { itemView.setOnClickListener { this } }
 
         fun bind(fever: Fever) {
+            val context = feverTitle.context // Seems like a meh way to get context, but actually suggested here: https://stackoverflow.com/questions/32136973/how-to-get-a-context-in-a-recycler-view-adapter
             feverTitle.setText(fever.name)
-            feverDate.setText(fever.dateTime.toStandardFormat())
+            val dateLabel = "${context.getString(R.string.created_on)} ${fever.dateTime.toStandardFormat()}"
+            feverDate.setText(dateLabel)
         }
 
         override fun onClick(p0: View?) {
