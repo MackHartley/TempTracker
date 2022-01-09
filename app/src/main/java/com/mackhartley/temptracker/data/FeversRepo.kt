@@ -1,6 +1,7 @@
 package com.mackhartley.temptracker.data
 
 import com.mackhartley.temptracker.data.models.Fever
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -12,7 +13,7 @@ class FeversRepo @Inject constructor(
         appDao.insertTempCollection(fever)
     }
 
-    suspend fun getAllFevers(): List<Fever> {
+    fun getAllFevers(): Flow<List<Fever>> {
         return appDao.getAllFevers()
     }
 }

@@ -8,6 +8,7 @@ import com.mackhartley.temptracker.data.models.Fever
 import com.mackhartley.temptracker.usecases.RetrieveFeversUseCase
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -26,12 +27,8 @@ class FeversViewModel @Inject constructor(
 
     fun retrieveFevers() {
         viewModelScope.launch {
-            try {
-                _uiState.value = FeversUIState.Loading
-                val fevers: List<Fever> = retrieveFeversUseCase.invoke()
-                _uiState.value = fevers.toContent()
-            } catch (exception: Exception) {
-                _uiState.value = FeversUIState.Error
+            retrieveFeversUseCase.invoke().collect {
+                _uiState.value = FeversUIState.Content(it)
             }
         }
     }

@@ -9,9 +9,3 @@ sealed class FeversUIState {
         val fevers: List<Fever>
     ) : FeversUIState()
 }
-
-fun List<Fever>.toContent(): FeversUIState.Content {
-    return FeversUIState.Content(
-        this
-    )
-}

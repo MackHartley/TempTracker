@@ -30,6 +30,7 @@ class FeversFragment : Fragment() {
     lateinit var modelFactory: ViewModelProvider.Factory
     lateinit var feversViewModel: FeversViewModel
     lateinit var feversAdapter: FeversListAdapter
+    lateinit var feversRecyclerView: RecyclerView
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -51,8 +52,17 @@ class FeversFragment : Fragment() {
     private fun initRV() {
         binding?.let {
             with(it.feversRv) {
-                layoutManager = LinearLayoutManager(activity)
-                feversAdapter = FeversListAdapter()
+                feversRecyclerView = this
+                val feversLLM = LinearLayoutManager(activity)
+                layoutManager = feversLLM
+                feversAdapter = FeversListAdapter().also {
+                    // REF: https://stackoverflow.com/questions/53248736/listadapter-submitlist-how-to-scroll-to-beginning
+                    it.registerAdapterDataObserver(object : RecyclerView.AdapterDataObserver() {
+                        override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
+                            feversLLM.scrollToPositionWithOffset(positionStart, 0)
+                        }
+                    })
+                }
                 adapter = feversAdapter
             }
         }
@@ -60,12 +70,11 @@ class FeversFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
+        feversViewModel.retrieveFevers()
         binding?.let {
             it.addFeverFab.setOnClickListener {
                 feversViewModel.addFever()
-                feversViewModel.retrieveFevers()
             }
-
         }
 
         feversViewModel.uiState.observe(viewLifecycleOwner) { state ->
@@ -90,7 +99,6 @@ class FeversFragment : Fragment() {
                         navigateTo(action)
                     }
                 }
-
             }
         }
 

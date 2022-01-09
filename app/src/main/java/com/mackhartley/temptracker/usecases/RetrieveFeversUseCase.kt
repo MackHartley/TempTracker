@@ -10,7 +10,7 @@ import javax.inject.Singleton
 class RetrieveFeversUseCase @Inject constructor(
     private val feversRepo: FeversRepo
 ) {
-    suspend fun invoke(): List<Fever> {
+    fun invoke(): Flow<List<Fever>> {
         return feversRepo.getAllFevers()
     }
 }

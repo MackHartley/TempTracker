@@ -14,5 +14,5 @@ interface AppDao {
     suspend fun insertTempCollection(fever: Fever)
 
     @Query("SELECT * FROM fever ORDER BY datetime(dateTime) DESC")
-    suspend fun getAllFevers(): List<Fever>
+    fun getAllFevers(): Flow<List<Fever>>
 }
