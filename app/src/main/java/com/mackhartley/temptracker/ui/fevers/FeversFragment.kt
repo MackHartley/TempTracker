@@ -88,14 +88,14 @@ class FeversFragment : Fragment(), FeversListAdapter.FeverItemClickListener {
             }
         }
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
-            viewModel.uiEvent.collect { newUiState ->
-                when (newUiState) {
+            viewModel.uiEvent.collect { newUiEvent ->
+                when (newUiEvent) {
                     FeversUIEvent.NavigateToAddFeverUI -> {
                         val action = FeversFragmentDirections.actionFeverFragmentToAddFeverDialog()
                         navigateTo(action)
                     }
                     is FeversUIEvent.NavigateToFeverDetailsUI -> {
-                        val action = FeversFragmentDirections.actionFeverFragmentToFeverDetailsFragment(newUiState.feverId)
+                        val action = FeversFragmentDirections.actionFeverFragmentToFeverDetailsFragment(newUiEvent.feverId)
                         navigateTo(action)
                     }
                 }.exhaustive

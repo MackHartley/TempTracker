@@ -20,13 +20,25 @@
     <dialog
         android:id="@+id/addFeverDialog"
         android:name="com.mackhartley.temptracker.ui.addfever.AddFeverDialog"
-        android:label="AddFeverDialog"
+        android:label="@string/add_fever"
         tools:layout="@layout/dialog_add_fever" />
     <fragment
         android:id="@+id/feverDetailsFragment"
         android:name="com.mackhartley.temptracker.ui.feverdetails.FeverDetailsFragment"
         android:label="@string/fever_details"
-        tools:layout="@layout/fragment_fever_details" >
+        tools:layout="@layout/fragment_fever_details">
+        <argument
+            android:name="feverId"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_feverDetailsFragment_to_feverHistoryFragment"
+            app:destination="@id/feverHistoryFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/feverHistoryFragment"
+        android:name="com.mackhartley.temptracker.ui.feverhistory.FeverHistoryFragment"
+        android:label="@string/measurements"
+        tools:layout="@layout/fragment_fever_history" >
         <argument
             android:name="feverId"
             app:argType="integer" />
