@@ -33,14 +33,26 @@
         <action
             android:id="@+id/action_feverDetailsFragment_to_feverHistoryFragment"
             app:destination="@id/feverHistoryFragment" />
+        <action
+            android:id="@+id/action_feverDetailsFragment_to_addEditTempDialog"
+            app:destination="@id/addEditTempDialog" />
     </fragment>
     <fragment
         android:id="@+id/feverHistoryFragment"
         android:name="com.mackhartley.temptracker.ui.feverhistory.FeverHistoryFragment"
         android:label="@string/measurements"
-        tools:layout="@layout/fragment_fever_history" >
+        tools:layout="@layout/fragment_fever_history">
         <argument
             android:name="feverId"
             app:argType="integer" />
     </fragment>
+    <dialog
+        android:id="@+id/addEditTempDialog"
+        android:name="com.mackhartley.temptracker.ui.addtemp.AddEditTempDialog"
+        android:label="AddEditTempDialog"
+        tools:layout="@layout/dialog_add_edit_temp">
+        <argument
+            android:name="feverId"
+            app:argType="integer" />
+    </dialog>
 </navigation>

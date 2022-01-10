@@ -28,4 +28,10 @@ class FeverDetailsViewModel @Inject constructor(
         }
     }
 
+    fun addNewTemp(feverId: Int) {
+        viewModelScope.launch {
+            _uiEvent.send(FeverDetailsUIEvent.NavigateToAddEditTempUI(feverId))
+        }
+    }
+
 }

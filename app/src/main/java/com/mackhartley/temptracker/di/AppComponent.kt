@@ -4,6 +4,7 @@ import android.content.Context
 import com.mackhartley.temptracker.data.AppDao
 import com.mackhartley.temptracker.data.AppDataBase
 import com.mackhartley.temptracker.ui.addfever.AddFeverDialog
+import com.mackhartley.temptracker.ui.addtemp.AddEditTempDialog
 import com.mackhartley.temptracker.ui.feverdetails.FeverDetailsFragment
 import com.mackhartley.temptracker.ui.fevers.FeversFragment
 import com.squareup.anvil.annotations.ContributesTo
@@ -46,4 +47,5 @@ interface ComponentInterface {
     fun inject(feversFragment: FeversFragment)
     fun inject(addFeverDialog: AddFeverDialog)
     fun inject(feverDetailsFragment: FeverDetailsFragment)
+    fun inject(addEditTempDialog: AddEditTempDialog)
 }

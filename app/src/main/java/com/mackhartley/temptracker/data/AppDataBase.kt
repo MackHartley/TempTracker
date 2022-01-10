@@ -14,7 +14,7 @@ import com.mackhartley.temptracker.data.models.TempLog
         TempLog::class,
         Fever::class
     ],
-    version = 1,
+    version = 2,
     exportSchema = true
 )
 @TypeConverters(Converters::class)
@@ -35,6 +35,7 @@ abstract class AppDataBase : RoomDatabase() {
 
             synchronized(this) {
                 val instance = Room.databaseBuilder(context.applicationContext, AppDataBase::class.java, "app_database")
+                    .fallbackToDestructiveMigration()
                     .build()
                 INSTANCE = instance
                 return instance

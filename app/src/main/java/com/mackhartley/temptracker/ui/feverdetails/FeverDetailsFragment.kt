@@ -42,6 +42,9 @@ class FeverDetailsFragment : Fragment() {
             viewHistoryBtn.setOnClickListener {
                 viewModel.viewFeverHistory(args.feverId)
             }
+            addTempFab.setOnClickListener {
+                viewModel.addNewTemp(args.feverId)
+            }
         }
         binding = newBinding
         return newBinding.root
@@ -55,7 +58,11 @@ class FeverDetailsFragment : Fragment() {
                         val action = FeverDetailsFragmentDirections.actionFeverDetailsFragmentToFeverHistoryFragment(newUiEvent.feverId)
                         navigateTo(action)
                     }
-                }
+                    is FeverDetailsUIEvent.NavigateToAddEditTempUI -> {
+                        val action = FeverDetailsFragmentDirections.actionFeverDetailsFragmentToAddEditTempDialog(newUiEvent.feverId)
+                        navigateTo(action)
+                    }
+                }.exhaustive
             }
         }
     }

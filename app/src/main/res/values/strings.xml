@@ -13,5 +13,5 @@
     <string name="fever_details">Fever Details</string>
     <string name="view_measurements">View Measurements</string>
     <string name="measurements">Measurements</string>
-    <string name="add_fever">Add Fever</string>
+    <string name="record_temperature">Record Temperature</string>
 </resources>

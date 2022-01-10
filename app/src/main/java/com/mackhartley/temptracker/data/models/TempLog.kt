@@ -21,7 +21,7 @@ data class TempLog(
     @PrimaryKey(autoGenerate = true) val id: Int,
     @ColumnInfo(index = true)
     val parentId: Int,
-    val datetime: OffsetDateTime,
+    val dateCreated: OffsetDateTime,
     val temp: Double
 )
 

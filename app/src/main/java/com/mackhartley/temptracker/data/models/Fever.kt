@@ -7,13 +7,13 @@ import org.threeten.bp.OffsetDateTime
 @Entity(tableName = "fever")
 data class Fever (
     @PrimaryKey(autoGenerate = true) val id: Int,
-    val dateTime: OffsetDateTime,
+    val dateCreated: OffsetDateTime,
     val name: String
 ) {
     companion object {
         fun newInstance(name: String) = Fever(
             id = 0,
-            dateTime = OffsetDateTime.now(),
+            dateCreated = OffsetDateTime.now(),
             name = name
         )
     }
