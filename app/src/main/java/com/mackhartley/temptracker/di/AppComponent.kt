@@ -6,6 +6,7 @@ import com.mackhartley.temptracker.data.AppDataBase
 import com.mackhartley.temptracker.ui.addfever.AddFeverDialog
 import com.mackhartley.temptracker.ui.addtemp.AddEditTempDialog
 import com.mackhartley.temptracker.ui.feverdetails.FeverDetailsFragment
+import com.mackhartley.temptracker.ui.feverhistory.FeverHistoryFragment
 import com.mackhartley.temptracker.ui.fevers.FeversFragment
 import com.squareup.anvil.annotations.ContributesTo
 import com.squareup.anvil.annotations.MergeComponent
@@ -48,4 +49,5 @@ interface ComponentInterface {
     fun inject(addFeverDialog: AddFeverDialog)
     fun inject(feverDetailsFragment: FeverDetailsFragment)
     fun inject(addEditTempDialog: AddEditTempDialog)
+    fun inject(feverHistoryFragment: FeverHistoryFragment)
 }

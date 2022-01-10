@@ -12,9 +12,9 @@ import com.mackhartley.temptracker.data.models.Fever
 import com.mackhartley.temptracker.databinding.ItemFeverBinding
 import com.mackhartley.temptracker.utils.toStandardFormat
 
-class FeversListAdapter(
+class FeversAdapter(
     private val clickListener: FeverItemClickListener
-) : ListAdapter<Fever, FeversListAdapter.FeverVH>(FeverItemDiffCallback) {
+) : ListAdapter<Fever, FeversAdapter.FeverVH>(FeverItemDiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FeverVH {
         val binding = ItemFeverBinding.inflate(LayoutInflater.from(parent.context), parent, false)

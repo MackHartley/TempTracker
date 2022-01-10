@@ -18,14 +18,14 @@ import com.mackhartley.temptracker.utils.exhaustive
 import javax.inject.Inject
 import kotlinx.coroutines.flow.collect
 
-class FeversFragment : Fragment(), FeversListAdapter.FeverItemClickListener {
+class FeversFragment : Fragment(), FeversAdapter.FeverItemClickListener {
 
     var binding: FragmentFeversBinding? = null
 
     @Inject
     lateinit var modelFactory: ViewModelProvider.Factory
     lateinit var viewModel: FeversViewModel
-    lateinit var feversAdapter: FeversListAdapter
+    lateinit var feversAdapter: FeversAdapter
     lateinit var feversRecyclerView: RecyclerView
 
     override fun onAttach(context: Context) {
@@ -51,7 +51,7 @@ class FeversFragment : Fragment(), FeversListAdapter.FeverItemClickListener {
                 feversRecyclerView = this
                 val feversLLM = LinearLayoutManager(activity)
                 layoutManager = feversLLM
-                feversAdapter = FeversListAdapter(this@FeversFragment).also {
+                feversAdapter = FeversAdapter(this@FeversFragment).also {
                     // REF: https://stackoverflow.com/questions/53248736/listadapter-submitlist-how-to-scroll-to-beginning
                     it.registerAdapterDataObserver(object : RecyclerView.AdapterDataObserver() {
                         override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {

@@ -12,7 +12,10 @@ import kotlinx.coroutines.flow.Flow
 interface AppDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertTempCollection(fever: Fever)
+    suspend fun insertFever(fever: Fever)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertTemperature(tempLog: TempLog)
 
     @Query("SELECT * FROM fever ORDER BY datetime(dateCreated) DESC")
     fun getAllFevers(): Flow<List<Fever>>

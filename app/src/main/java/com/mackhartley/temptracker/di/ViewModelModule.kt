@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.mackhartley.temptracker.ui.addfever.AddFeverViewModel
 import com.mackhartley.temptracker.ui.addtemp.AddEditTempViewModel
 import com.mackhartley.temptracker.ui.feverdetails.FeverDetailsViewModel
+import com.mackhartley.temptracker.ui.feverhistory.FeverHistoryViewModel
 import com.mackhartley.temptracker.ui.fevers.FeversViewModel
 import com.squareup.anvil.annotations.ContributesTo
 import dagger.Binds
@@ -36,4 +37,9 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(AddEditTempViewModel::class)
     internal abstract fun bindAddEditTempViewModel(addEditTempViewModel: AddEditTempViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(FeverHistoryViewModel::class)
+    internal abstract fun bindFeverHistoryViewModel(feverHistoryViewModel: FeverHistoryViewModel): ViewModel
 }

@@ -10,7 +10,7 @@ class FeversRepo @Inject constructor(
     private val appDao: AppDao
 ) {
     suspend fun addFever(fever: Fever) {
-        appDao.insertTempCollection(fever)
+        appDao.insertFever(fever)
     }
 
     fun getAllFevers(): Flow<List<Fever>> {

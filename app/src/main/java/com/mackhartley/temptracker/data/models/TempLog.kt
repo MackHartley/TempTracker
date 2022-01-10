@@ -23,7 +23,20 @@ data class TempLog(
     val parentId: Int,
     val dateCreated: OffsetDateTime,
     val temp: Double
-)
+) {
+    companion object {
+        fun newInstance(
+            parentId: Int,
+            dateCreated: OffsetDateTime,
+            temp: Double
+        ) = TempLog(
+            id = 0,
+            parentId = parentId,
+            dateCreated = dateCreated,
+            temp = temp
+        )
+    }
+}
 
 // Need ref to a Fever entity (https://medium.com/android-news/android-architecture-components-room-relationships-bf473510c14a)
 // Need to add a medicin category

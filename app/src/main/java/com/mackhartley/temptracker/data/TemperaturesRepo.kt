@@ -10,4 +10,8 @@ class TemperaturesRepo @Inject constructor(
     fun retrieveTemps(feverId: Int): Flow<List<TempLog>> {
         return appDao.getAllTempsForFever(feverId)
     }
+
+    suspend fun addNewTemp(tempLog: TempLog) {
+        appDao.insertTemperature(tempLog)
+    }
 }

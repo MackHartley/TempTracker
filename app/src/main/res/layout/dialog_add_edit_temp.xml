@@ -18,6 +18,7 @@
         android:id="@+id/temp_et"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/temp_label"
         app:layout_constraintTop_toTopOf="parent" />
