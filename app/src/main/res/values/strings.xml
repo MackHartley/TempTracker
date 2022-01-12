@@ -14,4 +14,5 @@
     <string name="view_measurements">View Measurements</string>
     <string name="measurements">Measurements</string>
     <string name="record_temperature">Record Temperature</string>
+    <string name="insufficient_data">Insufficient Data</string>
 </resources>

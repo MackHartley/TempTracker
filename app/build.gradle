@@ -81,4 +81,10 @@ dependencies {
 //    annotationProcessor 'com.google.dagger:hilt-compiler:2.40.5'
 
     implementation "androidx.cardview:cardview:1.0.0"
+
+    // Charting
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+
+    // Timber
+    implementation 'com.jakewharton.timber:timber:4.7.1'
 }

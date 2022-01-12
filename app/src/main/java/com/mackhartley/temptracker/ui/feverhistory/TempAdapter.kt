@@ -11,6 +11,7 @@ import com.mackhartley.temptracker.databinding.FragmentFeverHistoryBinding
 import com.mackhartley.temptracker.databinding.ItemFeverBinding
 import com.mackhartley.temptracker.databinding.ItemTempBinding
 import com.mackhartley.temptracker.ui.fevers.FeversAdapter
+import com.mackhartley.temptracker.utils.getFormattedTime
 import com.mackhartley.temptracker.utils.toStandardFormat
 
 class TempAdapter(
@@ -37,7 +38,7 @@ class TempAdapter(
         fun bind(tempLog: TempLog) {
             tempValue.setText(tempLog.temp.toString())
             tempDate.setText(tempLog.dateCreated.toStandardFormat())
-            tempTime.setText("10:06 PM")
+            tempTime.setText(getFormattedTime(tempLog.dateCreated))
 
         }
     }

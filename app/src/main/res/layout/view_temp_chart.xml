@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/line_chart"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/no_data_header"
+        style="@style/ChartNoDataTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/insufficient_data"
+        app:layout_constraintBottom_toTopOf="@id/no_data_subtitle"
+        app:layout_constraintEnd_toEndOf="@id/line_chart"
+        app:layout_constraintStart_toStartOf="@id/line_chart"
+        app:layout_constraintTop_toTopOf="@id/line_chart"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <TextView
+        android:id="@+id/no_data_subtitle"
+        style="@style/ChartNoDataDesc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintBottom_toBottomOf="@id/line_chart"
+        app:layout_constraintEnd_toEndOf="@id/line_chart"
+        app:layout_constraintStart_toStartOf="@id/line_chart"
+        app:layout_constraintTop_toBottomOf="@id/no_data_header"
+        tools:text="After you record a meal your calorie intake per hour will show up here" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

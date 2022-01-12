@@ -9,12 +9,20 @@
         android:layout_height="match_parent"
         android:padding="@dimen/default_layout_padding">
 
+        <com.mackhartley.temptracker.ui.feverhistory.charts.TempChart
+            android:id="@+id/temp_chart"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <Button
             android:id="@+id/view_history_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             android:text="@string/view_measurements"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/temp_chart" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

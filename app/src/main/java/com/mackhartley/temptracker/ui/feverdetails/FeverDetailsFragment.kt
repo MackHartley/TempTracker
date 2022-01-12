@@ -12,6 +12,7 @@ import androidx.navigation.fragment.navArgs
 import com.mackhartley.temptracker.databinding.FragmentFeverDetailsBinding
 import com.mackhartley.temptracker.getAppComponent
 import com.mackhartley.temptracker.navigateTo
+import com.mackhartley.temptracker.ui.feverhistory.charts.TempChart
 import com.mackhartley.temptracker.utils.exhaustive
 import javax.inject.Inject
 import kotlinx.coroutines.flow.collect
@@ -24,7 +25,7 @@ class FeverDetailsFragment : Fragment() {
     @Inject
     lateinit var modelFactory: ViewModelProvider.Factory
     lateinit var viewModel: FeverDetailsViewModel
-
+    lateinit var tempChart: TempChart
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -39,6 +40,7 @@ class FeverDetailsFragment : Fragment() {
     ): View? {
         val newBinding = FragmentFeverDetailsBinding.inflate(inflater, container, false)
         with(newBinding) {
+            this@FeverDetailsFragment.tempChart = tempChart
             viewHistoryBtn.setOnClickListener {
                 viewModel.viewFeverHistory(args.feverId)
             }
@@ -51,6 +53,13 @@ class FeverDetailsFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        viewModel.getTemps(args.feverId)
+        viewModel.uiState.observe(viewLifecycleOwner) { state ->
+            val tempChartData = state.temps.map {
+                Pair(it.dateCreated, it.temp)
+            }
+            tempChart.updateData(tempChartData)
+        }
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.uiEvent.collect { newUiEvent ->
                 when (newUiEvent) {

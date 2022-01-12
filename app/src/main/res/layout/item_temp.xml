@@ -16,30 +16,30 @@
 
         <TextView
             android:id="@+id/temp_value"
+            style="@style/TextAppearance.MaterialComponents.Headline6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            style="@style/TextAppearance.MaterialComponents.Headline6"
             tools:text="102.4" />
 
         <TextView
             android:id="@+id/temp_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            app:layout_constraintEnd_toStartOf="@id/temp_time"
-            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             tools:text="1/9/22" />
 
         <TextView
             android:id="@+id/temp_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginEnd="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/temp_date"
+            app:layout_constraintTop_toTopOf="parent"
             tools:text="10:06 PM" />
 
 

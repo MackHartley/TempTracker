@@ -18,6 +18,7 @@
         android:id="@+id/temp_et"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:inputType="numberDecimal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/temp_label"
@@ -27,27 +28,31 @@
         android:id="@+id/datetime_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
         android:text="Taken at: "
+        app:layout_constraintBottom_toBottomOf="@id/temp_time_field"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/temp_label" />
+        app:layout_constraintTop_toTopOf="@id/temp_time_field" />
 
     <TextView
         android:id="@+id/temp_time_field"
+        style="@style/DateTimeSelectionText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
         android:text="10:06 PM"
         app:layout_constraintStart_toEndOf="@id/datetime_label"
-        app:layout_constraintTop_toTopOf="@id/datetime_label" />
+        app:layout_constraintTop_toBottomOf="@id/temp_et" />
 
     <TextView
         android:id="@+id/temp_date_field"
+        style="@style/DateTimeSelectionText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="16dp"
         android:text="1/9/2022"
         app:layout_constraintStart_toEndOf="@id/temp_time_field"
-        app:layout_constraintTop_toTopOf="@id/datetime_label" />
+        app:layout_constraintTop_toBottomOf="@id/temp_et" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
