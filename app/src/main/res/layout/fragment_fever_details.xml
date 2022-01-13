@@ -9,7 +9,7 @@
         android:layout_height="match_parent"
         android:padding="@dimen/default_layout_padding">
 
-        <com.mackhartley.temptracker.ui.feverhistory.charts.TempChart
+        <com.mackhartley.temptracker.ui.feverdetails.charts.TempChart
             android:id="@+id/temp_chart"
             android:layout_width="match_parent"
             android:layout_height="200dp"

@@ -9,11 +9,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
-import com.mackhartley.temptracker.data.models.TempLog
 import com.mackhartley.temptracker.databinding.FragmentFeverDetailsBinding
 import com.mackhartley.temptracker.getAppComponent
 import com.mackhartley.temptracker.navigateTo
-import com.mackhartley.temptracker.ui.feverhistory.charts.TempChart
+import com.mackhartley.temptracker.ui.feverdetails.charts.TempChart
 import com.mackhartley.temptracker.utils.exhaustive
 import javax.inject.Inject
 import kotlinx.coroutines.flow.collect

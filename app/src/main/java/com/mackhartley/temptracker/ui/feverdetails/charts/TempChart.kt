@@ -1,4 +1,4 @@
-package com.mackhartley.temptracker.ui.feverhistory.charts
+package com.mackhartley.temptracker.ui.feverdetails.charts
 
 import android.content.Context
 import android.util.AttributeSet
@@ -17,7 +17,9 @@ import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import com.github.mikephil.charting.utils.EntryXComparator
 import com.mackhartley.temptracker.R
 import com.mackhartley.temptracker.databinding.ViewTempChartBinding
+import com.mackhartley.temptracker.utils.getFormattedTime
 import com.mackhartley.temptracker.utils.toStandardFormat
+import org.threeten.bp.Duration
 import org.threeten.bp.LocalDate
 import org.threeten.bp.LocalDateTime
 import org.threeten.bp.OffsetDateTime
@@ -36,11 +38,14 @@ class TempChart @JvmOverloads constructor(
 
     private val animationLength = resources.getInteger(R.integer.animation_length_ms)
 
+    private var showXAxisInHours = true
+
     companion object {
         private const val MAX_X_AXIS_LABELS = 5
         private const val MIN_X_VALUES_FOR_ANIM = 7
         private const val GRAPH_MAX_Y_VAL_MODIFIER = 1.05
         private const val GRAPH_MIN_Y_VAL_MODIFIER = .95
+        private const val MIN_HOURS_TO_SHOW_X_AXIS_DATES = 48
     }
 
     init {
@@ -99,6 +104,7 @@ class TempChart @JvmOverloads constructor(
         } else {
             showEmptyStateView(true)
         }
+        updateXAxisUnits(dataToDisplay)
 
         updateChartRange(dataToDisplay)
         updateNumberOfChartLabels(dataToDisplay)
@@ -118,6 +124,23 @@ class TempChart @JvmOverloads constructor(
         val lineData = LineData(lineDataSet)
         lineChart.data = lineData
         lineChart.invalidate()
+    }
+
+    private fun updateXAxisUnits(dataToDisplay: List<Pair<OffsetDateTime, Double>>) {
+        if (dataToDisplay.size < 2) {
+            showXAxisInHours = true
+        } else {
+            val first = dataToDisplay.first().first
+            val last = dataToDisplay.last().first
+            val min = if (first > last) last else first
+            val max = if (first > last) first else last
+            showXAxisInHours = shouldShowXAxisInHours(min, max)
+        }
+    }
+
+    private fun shouldShowXAxisInHours(date1: OffsetDateTime, date2: OffsetDateTime): Boolean {
+        val x = Duration.between(date1, date2)
+        return x.toHours() < MIN_HOURS_TO_SHOW_X_AXIS_DATES
     }
 
     private fun setChartColor(lineDataSet: LineDataSet) {
@@ -182,15 +205,25 @@ class TempChart @JvmOverloads constructor(
 
     inner class DateAxisValueFormatter : IndexAxisValueFormatter() {
         override fun getFormattedValue(value: Float): String {
-            return xAxisFloatToDate(value).toStandardFormat()
+            return if (showXAxisInHours) {
+                xAxisFloatToHourOfDay(value)
+            } else {
+                xAxisFloatToDate(value)
+            }
         }
     }
 
-    private fun xAxisFloatToDate(sec: Float?): LocalDate {
-        val value = sec ?: 0f
+    private fun xAxisFloatToHourOfDay(sec: Float): String {
         val zone = OffsetDateTime.now().offset
-        val date = LocalDateTime.ofEpochSecond(value.roundToLong(), 0, zone).toLocalDate()
-        return date
+        val time = LocalDateTime.ofEpochSecond(sec.roundToLong(), 0, zone).toLocalTime()
+        return getFormattedTime(time)
+
+    }
+
+    private fun xAxisFloatToDate(sec: Float): String {
+        val zone = OffsetDateTime.now().offset
+        val date = LocalDateTime.ofEpochSecond(sec.roundToLong(), 0, zone).toLocalDate()
+        return date.toStandardFormat()
     }
 
 }

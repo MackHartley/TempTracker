@@ -1,0 +1,20 @@
+x - Make better x axis label for graph
+Update graph styles
+Add markers for graph
+Make graphs a bit bigger
+
+Add settings menu
+Add setting to change dark mode
+add setting to change C/F
+
+Update darkmode/lightmode coloring
+Update date/time picker colors
+
+Add ability to change date/time range
+
+Add ability to delete temp logs
+Add ability to edit or delete fevers
+
+Add min, max, avg widgets for fever
+Add rolling avg chart for fever details
+Add functionality to keep user at a fever detail screen until they leave it (persist between sessions)
