@@ -38,5 +38,10 @@
         <item name="android:textSize">16sp</item>
     </style>
 
+    <style name="DefaultCardView">
+        <item name="android:foreground">?android:attr/selectableItemBackground</item>
+        <item name="cardCornerRadius">@dimen/default_corner_radius</item>
+    </style>
+
 
 </resources>

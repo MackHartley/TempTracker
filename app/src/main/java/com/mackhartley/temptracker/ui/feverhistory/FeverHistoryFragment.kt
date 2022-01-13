@@ -10,12 +10,14 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.mackhartley.temptracker.data.models.TempLog
 import com.mackhartley.temptracker.databinding.FragmentFeverHistoryBinding
 import com.mackhartley.temptracker.getAppComponent
+import com.mackhartley.temptracker.navigateTo
 import com.mackhartley.temptracker.ui.feverdetails.FeverDetailsFragmentArgs
 import javax.inject.Inject
 
-class FeverHistoryFragment : Fragment() {
+class FeverHistoryFragment : Fragment(), TempAdapter.TempItemClickListener {
 
     private var binding: FragmentFeverHistoryBinding? = null
     private val args: FeverDetailsFragmentArgs by navArgs()
@@ -49,7 +51,7 @@ class FeverHistoryFragment : Fragment() {
                 tempRecyclerView = this
                 val tempLLM = LinearLayoutManager(activity)
                 layoutManager = tempLLM
-                tempAdapter = TempAdapter().also {
+                tempAdapter = TempAdapter(this@FeverHistoryFragment).also {
                     it.registerAdapterDataObserver(object : RecyclerView.AdapterDataObserver() {
                         override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
                             tempLLM.scrollToPositionWithOffset(positionStart, 0)
@@ -69,5 +71,10 @@ class FeverHistoryFragment : Fragment() {
         }
 
         viewModel.retrieveTemps(args.feverId)
+    }
+
+    override fun itemClicked(tempLog: TempLog) {
+        val action = FeverHistoryFragmentDirections.actionFeverHistoryFragmentToAddEditTempDialog(args.feverId, tempLog)
+        navigateTo(action)
     }
 }

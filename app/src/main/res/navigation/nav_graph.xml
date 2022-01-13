@@ -45,6 +45,9 @@
         <argument
             android:name="feverId"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_feverHistoryFragment_to_addEditTempDialog"
+            app:destination="@id/addEditTempDialog" />
     </fragment>
     <dialog
         android:id="@+id/addEditTempDialog"
@@ -54,5 +57,9 @@
         <argument
             android:name="feverId"
             app:argType="integer" />
+        <argument
+            android:name="tempLogToEdit"
+            app:argType="com.mackhartley.temptracker.data.models.TempLog"
+            app:nullable="true" />
     </dialog>
 </navigation>

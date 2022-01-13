@@ -1,6 +1,7 @@
 package com.mackhartley.temptracker.ui.feverhistory
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -13,14 +14,15 @@ import com.mackhartley.temptracker.databinding.ItemTempBinding
 import com.mackhartley.temptracker.ui.fevers.FeversAdapter
 import com.mackhartley.temptracker.utils.getFormattedTime
 import com.mackhartley.temptracker.utils.toStandardFormat
+import timber.log.Timber
 
 class TempAdapter(
-
+    private val clickListener: TempItemClickListener
 ) : ListAdapter<TempLog, TempAdapter.TempVH>(TempLogDiffCallback) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TempAdapter.TempVH {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TempVH {
         val binding = ItemTempBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return TempAdapter.TempVH(binding)
+        return TempVH(binding, clickListener)
     }
 
     override fun onBindViewHolder(holder: TempVH, position: Int) {
@@ -29,17 +31,32 @@ class TempAdapter(
     }
 
     class TempVH(
-        itemBinding: ItemTempBinding
-    ) : RecyclerView.ViewHolder(itemBinding.root) {
+        itemBinding: ItemTempBinding,
+        private val clickListener: TempItemClickListener
+    ) : RecyclerView.ViewHolder(itemBinding.root), View.OnClickListener {
         private val tempValue = itemBinding.tempValue
         private val tempDate = itemBinding.tempDate
         private val tempTime = itemBinding.tempTime
+        private var tempLog: TempLog? = null
+
+        init {
+            itemView.setOnClickListener(this)
+        }
 
         fun bind(tempLog: TempLog) {
             tempValue.setText(tempLog.temp.toString())
             tempDate.setText(tempLog.dateCreated.toStandardFormat())
             tempTime.setText(getFormattedTime(tempLog.dateCreated))
+            this.tempLog = tempLog
+        }
 
+        override fun onClick(p0: View?) {
+            val safeTemp = tempLog
+            if (safeTemp != null) {
+                clickListener.itemClicked(safeTemp)
+            } else {
+                Timber.e("TempLog is null when TempVH clicked in TempAdapter")
+            }
         }
     }
 
@@ -51,6 +68,10 @@ class TempAdapter(
         override fun areContentsTheSame(oldItem: TempLog, newItem: TempLog): Boolean {
             return oldItem == newItem
         }
+    }
+
+    interface TempItemClickListener {
+        fun itemClicked(tempLog: TempLog)
     }
 }
 

@@ -11,6 +11,7 @@ import com.mackhartley.temptracker.R
 import com.mackhartley.temptracker.data.models.Fever
 import com.mackhartley.temptracker.databinding.ItemFeverBinding
 import com.mackhartley.temptracker.utils.toStandardFormat
+import timber.log.Timber
 
 class FeversAdapter(
     private val clickListener: FeverItemClickListener
@@ -50,7 +51,7 @@ class FeversAdapter(
             if (safeFeverId != null) {
                 clickListener.itemClicked(safeFeverId)
             } else {
-                Toast.makeText(feverTitle.context, "Error: feverId is null", Toast.LENGTH_SHORT).show()
+                Timber.e("Error: feverId is null")
             }
         }
     }

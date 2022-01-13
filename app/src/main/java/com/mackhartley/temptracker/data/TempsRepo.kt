@@ -14,4 +14,8 @@ class TempsRepo @Inject constructor(
     suspend fun addNewTemp(tempLog: TempLog) {
         appDao.insertTemperature(tempLog)
     }
+
+    suspend fun updateTemp(tempLog: TempLog) {
+        appDao.update(tempLog)
+    }
 }

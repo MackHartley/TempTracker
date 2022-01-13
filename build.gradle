@@ -20,6 +20,10 @@ buildscript {
     }
 }
 
+plugins {
+    id "org.jetbrains.kotlin.android" version "1.4.20" apply false
+}
+
 allprojects {
     repositories {
         google()
@@ -34,3 +38,4 @@ task clean(type: Delete) {
 }
 
 apply plugin: 'com.squareup.anvil'
+

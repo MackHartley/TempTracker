@@ -23,4 +23,20 @@ class AddEditTempViewModel @Inject constructor(
         }
     }
 
+    fun updateTemp(
+        prevId: Int,
+        feverId: Int,
+        dateTime: OffsetDateTime,
+        temp: Double
+    ) {
+        val tempLogToUpdate = TempLog(
+            id = prevId,
+            parentId = feverId,
+            dateCreated = dateTime,
+            temp = temp
+        )
+        viewModelScope.launch {
+            tempsRepo.updateTemp(tempLogToUpdate)
+        }
+    }
 }

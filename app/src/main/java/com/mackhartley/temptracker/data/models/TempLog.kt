@@ -1,11 +1,14 @@
 package com.mackhartley.temptracker.data.models
 
+import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 import org.threeten.bp.OffsetDateTime
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 @Entity(
     tableName = "temp_log",
     foreignKeys = [
@@ -23,7 +26,7 @@ data class TempLog(
     val parentId: Int,
     val dateCreated: OffsetDateTime,
     val temp: Double
-) {
+) : Parcelable {
     companion object {
         fun newInstance(
             parentId: Int,

@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
+import com.mackhartley.temptracker.data.models.TempLog
 import com.mackhartley.temptracker.databinding.FragmentFeverDetailsBinding
 import com.mackhartley.temptracker.getAppComponent
 import com.mackhartley.temptracker.navigateTo
@@ -68,7 +69,7 @@ class FeverDetailsFragment : Fragment() {
                         navigateTo(action)
                     }
                     is FeverDetailsUIEvent.NavigateToAddEditTempUI -> {
-                        val action = FeverDetailsFragmentDirections.actionFeverDetailsFragmentToAddEditTempDialog(newUiEvent.feverId)
+                        val action = FeverDetailsFragmentDirections.actionFeverDetailsFragmentToAddEditTempDialog(newUiEvent.feverId, null)
                         navigateTo(action)
                     }
                 }.exhaustive

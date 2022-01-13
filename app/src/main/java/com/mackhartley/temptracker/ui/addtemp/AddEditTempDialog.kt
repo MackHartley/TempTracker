@@ -9,16 +9,15 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.mackhartley.temptracker.R
+import com.mackhartley.temptracker.data.models.TempLog
 import com.mackhartley.temptracker.databinding.DialogAddEditTempBinding
-import com.mackhartley.temptracker.databinding.DialogAddFeverBinding
 import com.mackhartley.temptracker.getAppComponent
 import com.mackhartley.temptracker.showDialog
-import com.mackhartley.temptracker.ui.addfever.AddFeverViewModel
 import com.mackhartley.temptracker.ui.editdate.EditDateDialog
 import com.mackhartley.temptracker.ui.edittime.EditTimeDialog
-import com.mackhartley.temptracker.ui.feverdetails.FeverDetailsFragmentArgs
 import com.mackhartley.temptracker.utils.getFormattedDate
 import com.mackhartley.temptracker.utils.getFormattedTime
+import com.mackhartley.temptracker.utils.toTempNumberString
 import org.threeten.bp.LocalDate
 import org.threeten.bp.LocalTime
 import org.threeten.bp.OffsetDateTime
@@ -30,7 +29,7 @@ class AddEditTempDialog : DialogFragment(),
 
     var binding: DialogAddEditTempBinding? = null
 
-    private val args: FeverDetailsFragmentArgs by navArgs()
+    private val args: AddEditTempDialogArgs by navArgs()
 
     @Inject
     lateinit var modelFactory: ViewModelProvider.Factory
@@ -52,6 +51,9 @@ class AddEditTempDialog : DialogFragment(),
         val newBinding = DialogAddEditTempBinding.inflate(LayoutInflater.from(context))
         binding = newBinding
 
+        val idToEdit = args.tempLogToEdit
+        prepopulateFields(idToEdit)
+
         newBinding.let {
             it.tempTimeField.setOnClickListener {
                 val timePickerDialog = EditTimeDialog.newInstance(chosenTime)
@@ -66,21 +68,48 @@ class AddEditTempDialog : DialogFragment(),
         initDateView(chosenDate)
         initTimeView(chosenTime)
 
+        val buttonLabel = getPositiveButtonLabel()
+
         return builder
             .setTitle(getString(R.string.record_temperature))
-            .setPositiveButton(getString(R.string.add)) {_, _ -> addNewTemp()}
+            .setPositiveButton(buttonLabel) {_, _ -> addNewTemp()}
             .setNegativeButton(getString(R.string.cancel), null)
             .setView(newBinding.root)
             .create()
     }
 
+    private fun getPositiveButtonLabel() =
+        if (isNewLog()) getString(R.string.add) else getString(R.string.update)
+
+    private fun prepopulateFields(tempLogToEdit: TempLog?) {
+        if (tempLogToEdit != null) {
+            binding?.tempEt?.setText(tempLogToEdit.temp.toTempNumberString())
+            updateDate(tempLogToEdit.dateCreated.toLocalDate())
+            updateTime(tempLogToEdit.dateCreated.toLocalTime())
+        }
+    }
+
+    private fun isNewLog(): Boolean = args.tempLogToEdit == null
+
     private fun addNewTemp() {
         binding?.let {
             val temp = getProvidedTemp(it)
             val dateTime = getODT(chosenTime, chosenDate)
+
             if (temp != null) {
-                viewModel.addNewTemp(args.feverId, dateTime, temp)
+                val tempLogToEdit = args.tempLogToEdit
+                if (tempLogToEdit == null) { // Adding new log
+                    viewModel.addNewTemp(args.feverId, dateTime, temp)
+                } else {
+                    viewModel.updateTemp(
+                        tempLogToEdit.id,
+                        args.feverId,
+                        dateTime,
+                        temp
+                    )
+                }
             }
+
         }
     }
 
