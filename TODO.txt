@@ -1,11 +1,20 @@
 x - Make better x axis label for graph
+x - Make graphs a bit bigger
+x - Add markers for graph
+
+Figure out better scale for graph
 Update graph styles
-Add markers for graph
-Make graphs a bit bigger
+
+Update empty state view for measrements screen
+Allow users to add temp from fever measurements screen
+Add formatting to always show 100.0, or show an extra decimal if user wants
+Add logic checking for the temp log dialog numbers
+If user adds a temp of 0, the chart y range is 0. Fix that
+Entry, "Fever on 1/13/22" has a bug on the chart. Fix that
 
 Add settings menu
 Add setting to change dark mode
-add setting to change C/F
+add setting to change C/F(have Class that can be injected places and it has a dependency on the shed preferences class and can automatically format a temperature based on whether it's Celsius or Fahrenheit in user settings)
 
 Update darkmode/lightmode coloring
 Update date/time picker colors
@@ -15,6 +24,9 @@ Add ability to change date/time range
 Add ability to delete temp logs
 Add ability to edit or delete fevers
 
+Color Measurement cards based on fever severity
+Color Fever char temps based on severity
+update empty state view for fever details screen
 Add min, max, avg widgets for fever
 Add rolling avg chart for fever details
 Add functionality to keep user at a fever detail screen until they leave it (persist between sessions)

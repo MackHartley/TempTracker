@@ -7,4 +7,6 @@
     <dimen name="default_corner_radius">4dp</dimen>
     <dimen name="default_layout_padding">16dp</dimen>
     <dimen name="rv_fab_padding">128dp</dimen>
+    <dimen name="marker_dot_circumference">6dp</dimen>
+    <dimen name="marker_margin">3dp</dimen>
 </resources>

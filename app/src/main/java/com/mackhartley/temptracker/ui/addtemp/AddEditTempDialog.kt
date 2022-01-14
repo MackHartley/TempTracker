@@ -17,7 +17,7 @@ import com.mackhartley.temptracker.ui.editdate.EditDateDialog
 import com.mackhartley.temptracker.ui.edittime.EditTimeDialog
 import com.mackhartley.temptracker.utils.getFormattedDate
 import com.mackhartley.temptracker.utils.getFormattedTime
-import com.mackhartley.temptracker.utils.toTempNumberString
+import com.mackhartley.temptracker.utils.toTempString
 import org.threeten.bp.LocalDate
 import org.threeten.bp.LocalTime
 import org.threeten.bp.OffsetDateTime
@@ -83,7 +83,7 @@ class AddEditTempDialog : DialogFragment(),
 
     private fun prepopulateFields(tempLogToEdit: TempLog?) {
         if (tempLogToEdit != null) {
-            binding?.tempEt?.setText(tempLogToEdit.temp.toTempNumberString())
+            binding?.tempEt?.setText(tempLogToEdit.temp.toTempString())
             updateDate(tempLogToEdit.dateCreated.toLocalDate())
             updateTime(tempLogToEdit.dateCreated.toLocalTime())
         }

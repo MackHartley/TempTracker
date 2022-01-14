@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/marker_container"
+    android:layout_width="wrap_content"
+    android:hapticFeedbackEnabled="true"
+    android:layout_height="wrap_content">
+
+    <com.mackhartley.temptracker.ui.core.TriangleView
+        android:id="@+id/marker_pointer"
+        android:layout_width="16dp"
+        android:layout_height="8dp"
+        app:layout_constraintBottom_toBottomOf="@id/marker_body"
+        app:layout_constraintEnd_toEndOf="@id/marker_body"
+        app:layout_constraintStart_toStartOf="@id/marker_body"
+        app:layout_constraintTop_toBottomOf="@id/marker_body" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/marker_body"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_marker"
+        android:paddingStart="4dp"
+        android:paddingEnd="4dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/marker_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:textAlignment="center"
+            android:textColor="@color/chart_marker_text_color"
+            android:textSize="10sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="101.5" />
+
+        <TextView
+            android:id="@+id/marker_subtitle1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0dp"
+            android:maxLines="1"
+            android:textAlignment="center"
+            android:textColor="@color/chart_marker_text_color"
+            android:textSize="10sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/marker_title"
+            tools:text="11:09 PM" />
+
+        <TextView
+            android:id="@+id/marker_subtitle2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0dp"
+            android:maxLines="1"
+            android:textAlignment="center"
+            android:textColor="@color/chart_marker_text_color"
+            android:textSize="10sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/marker_subtitle1"
+            tools:text="Dec 33, 3023" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.mackhartley.temptracker.ui.core.CircleView
+        android:id="@+id/dot_view"
+        android:layout_width="@dimen/marker_dot_circumference"
+        android:layout_height="@dimen/marker_dot_circumference"
+        android:layout_marginTop="@dimen/marker_margin"
+        app:layout_constraintEnd_toEndOf="@id/marker_pointer"
+        app:layout_constraintStart_toStartOf="@id/marker_pointer"
+        app:layout_constraintTop_toBottomOf="@id/marker_pointer" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

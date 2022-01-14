@@ -2,6 +2,7 @@ package com.mackhartley.temptracker.ui.feverdetails.charts
 
 import android.content.Context
 import android.util.AttributeSet
+import android.view.HapticFeedbackConstants
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
@@ -17,14 +18,12 @@ import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import com.github.mikephil.charting.utils.EntryXComparator
 import com.mackhartley.temptracker.R
 import com.mackhartley.temptracker.databinding.ViewTempChartBinding
-import com.mackhartley.temptracker.utils.getFormattedTime
-import com.mackhartley.temptracker.utils.toStandardFormat
+import com.mackhartley.temptracker.ui.core.MyMarkerView
+import com.mackhartley.temptracker.utils.epochSecondToDate
+import com.mackhartley.temptracker.utils.epochSecondToHourOfDay
 import org.threeten.bp.Duration
-import org.threeten.bp.LocalDate
-import org.threeten.bp.LocalDateTime
 import org.threeten.bp.OffsetDateTime
 import java.util.*
-import kotlin.math.roundToLong
 
 class TempChart @JvmOverloads constructor(
     context: Context,
@@ -43,8 +42,8 @@ class TempChart @JvmOverloads constructor(
     companion object {
         private const val MAX_X_AXIS_LABELS = 5
         private const val MIN_X_VALUES_FOR_ANIM = 7
-        private const val GRAPH_MAX_Y_VAL_MODIFIER = 1.05
-        private const val GRAPH_MIN_Y_VAL_MODIFIER = .95
+        private const val GRAPH_MAX_Y_VAL_MODIFIER = 1.1
+        private const val GRAPH_MIN_Y_VAL_MODIFIER = .99
         private const val MIN_HOURS_TO_SHOW_X_AXIS_DATES = 48
     }
 
@@ -81,6 +80,7 @@ class TempChart @JvmOverloads constructor(
             setBorderWidth(.5f)
             extraLeftOffset = 36f
             extraRightOffset = 12f
+            extraTopOffset = 48f
 
             // x axis
             xAxis.textColor = chartLabelColor
@@ -94,6 +94,11 @@ class TempChart @JvmOverloads constructor(
             axisRight.setDrawGridLines(true)
             axisLeft.isEnabled = false
             axisRight.axisMinimum = 0f
+            marker = object : MyMarkerView(context, R.layout.view_marker_layout, showDot = true, allowMarkerClipping = true) {
+                override fun performHapticFeedback() {
+                    lineChart.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS)
+                }
+            }
         }
     }
 
@@ -206,24 +211,10 @@ class TempChart @JvmOverloads constructor(
     inner class DateAxisValueFormatter : IndexAxisValueFormatter() {
         override fun getFormattedValue(value: Float): String {
             return if (showXAxisInHours) {
-                xAxisFloatToHourOfDay(value)
+                epochSecondToHourOfDay(value)
             } else {
-                xAxisFloatToDate(value)
+                epochSecondToDate(value)
             }
         }
     }
-
-    private fun xAxisFloatToHourOfDay(sec: Float): String {
-        val zone = OffsetDateTime.now().offset
-        val time = LocalDateTime.ofEpochSecond(sec.roundToLong(), 0, zone).toLocalTime()
-        return getFormattedTime(time)
-
-    }
-
-    private fun xAxisFloatToDate(sec: Float): String {
-        val zone = OffsetDateTime.now().offset
-        val date = LocalDateTime.ofEpochSecond(sec.roundToLong(), 0, zone).toLocalDate()
-        return date.toStandardFormat()
-    }
-
 }

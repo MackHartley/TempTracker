@@ -1,10 +1,12 @@
 package com.mackhartley.temptracker.utils
 
 import org.threeten.bp.LocalDate
+import org.threeten.bp.LocalDateTime
 import org.threeten.bp.LocalTime
 import org.threeten.bp.OffsetDateTime
 import org.threeten.bp.format.DateTimeFormatter
 import org.threeten.bp.format.FormatStyle
+import kotlin.math.roundToLong
 
 val formatDateShort: DateTimeFormatter = DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT)
 val formatDateMedium: DateTimeFormatter = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)
@@ -54,4 +56,16 @@ fun getFormattedTime(time: LocalTime) : String {
 
 fun getFormattedTime(time: OffsetDateTime) : String {
     return time.format(formatTime)
+}
+
+fun epochSecondToHourOfDay(sec: Float): String {
+    val zone = OffsetDateTime.now().offset
+    val time = LocalDateTime.ofEpochSecond(sec.roundToLong(), 0, zone).toLocalTime()
+    return getFormattedTime(time)
+}
+
+fun epochSecondToDate(sec: Float): String {
+    val zone = OffsetDateTime.now().offset
+    val date = LocalDateTime.ofEpochSecond(sec.roundToLong(), 0, zone).toLocalDate()
+    return date.toStandardFormat(short = true)
 }
