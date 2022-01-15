@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_feverFragment_to_feverDetailsFragment"
             app:destination="@id/feverDetailsFragment" />
+        <action
+            android:id="@+id/action_feverFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
     </fragment>
     <dialog
         android:id="@+id/addFeverDialog"
@@ -52,7 +55,7 @@
     <dialog
         android:id="@+id/addEditTempDialog"
         android:name="com.mackhartley.temptracker.ui.addtemp.AddEditTempDialog"
-        android:label="AddEditTempDialog"
+        android:label="@string/add_edit_temp_dialog"
         tools:layout="@layout/dialog_add_edit_temp">
         <argument
             android:name="feverId"
@@ -62,4 +65,9 @@
             app:argType="com.mackhartley.temptracker.data.models.TempLog"
             app:nullable="true" />
     </dialog>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.mackhartley.temptracker.ui.settings.SettingsFragment"
+        android:label="@string/settings"
+        tools:layout="@layout/fragment_settings" />
 </navigation>

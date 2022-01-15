@@ -5,4 +5,5 @@ sealed class FeversUIEvent {
     data class NavigateToFeverDetailsUI(
         val feverId: Int
     ) : FeversUIEvent()
+    object NavigateToSettings : FeversUIEvent()
 }

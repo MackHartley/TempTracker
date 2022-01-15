@@ -3,6 +3,9 @@ package com.mackhartley.temptracker.ui.fevers
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
@@ -11,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.mackhartley.temptracker.R
 import com.mackhartley.temptracker.databinding.FragmentFeversBinding
 import com.mackhartley.temptracker.getAppComponent
 import com.mackhartley.temptracker.navigateTo
@@ -42,6 +46,7 @@ class FeversFragment : Fragment(), FeversAdapter.FeverItemClickListener {
         val newBinding = FragmentFeversBinding.inflate(inflater, container, false)
         binding = newBinding
         initRV()
+        setHasOptionsMenu(true)
         return newBinding.root
     }
 
@@ -98,9 +103,26 @@ class FeversFragment : Fragment(), FeversAdapter.FeverItemClickListener {
                         val action = FeversFragmentDirections.actionFeverFragmentToFeverDetailsFragment(newUiEvent.feverId)
                         navigateTo(action)
                     }
+                    FeversUIEvent.NavigateToSettings -> {
+                        val action = FeversFragmentDirections.actionFeverFragmentToSettingsFragment()
+                        navigateTo(action)
+                    }
                 }.exhaustive
             }
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.fevers_menu, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val id = item.itemId
+        when (id) {
+            R.id.settings -> viewModel.settingsIconClicked()
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun itemClicked(feverId: Int) {

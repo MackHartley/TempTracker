@@ -7,6 +7,7 @@ import com.mackhartley.temptracker.ui.addtemp.AddEditTempViewModel
 import com.mackhartley.temptracker.ui.feverdetails.FeverDetailsViewModel
 import com.mackhartley.temptracker.ui.feverhistory.FeverHistoryViewModel
 import com.mackhartley.temptracker.ui.fevers.FeversViewModel
+import com.mackhartley.temptracker.ui.settings.SettingsViewModel
 import com.squareup.anvil.annotations.ContributesTo
 import dagger.Binds
 import dagger.Module
@@ -42,4 +43,9 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(FeverHistoryViewModel::class)
     internal abstract fun bindFeverHistoryViewModel(feverHistoryViewModel: FeverHistoryViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(SettingsViewModel::class)
+    internal abstract fun bindSettingsViewModel(settingsViewModel: SettingsViewModel): ViewModel
 }

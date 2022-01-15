@@ -44,4 +44,10 @@ class FeversViewModel @Inject constructor(
             _uiEvent.send(FeversUIEvent.NavigateToFeverDetailsUI(feverId))
         }
     }
+
+    fun settingsIconClicked() {
+        viewModelScope.launch {
+            _uiEvent.send(FeversUIEvent.NavigateToSettings)
+        }
+    }
 }

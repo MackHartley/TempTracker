@@ -5,19 +5,25 @@ x - Add markers for graph
 x - Allow users to add temp from fever measurements screen
 x - Allow users to delete temps
 
+Add settings menu
+add setting to change C/F(have Class that can be injected places and it has a dependency on the shed preferences class and can automatically format a temperature based on whether it's Celsius or Fahrenheit in user settings)
+
+
 Add formatting to always show 100.0, or show an extra decimal if user wants
 Add logic checking for the temp log dialog numbers
 
 Entry, "Fever on 1/13/22" has a bug on the chart. Fix that
 
-Add settings menu
-Add setting to change dark mode
-add setting to change C/F(have Class that can be injected places and it has a dependency on the shed preferences class and can automatically format a temperature based on whether it's Celsius or Fahrenheit in user settings)
 
+
+
+
+Add setting to change dark mode
 Update darkmode/lightmode coloring
 Update date/time picker colors
 ==============================
 
+Make viewmodel DI use Anvil with @ContributesMultibinding
 
 Figure out better scale for graph
 Update graph styles
