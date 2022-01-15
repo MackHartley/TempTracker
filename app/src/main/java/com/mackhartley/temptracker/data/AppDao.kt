@@ -1,6 +1,7 @@
 package com.mackhartley.temptracker.data
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
@@ -20,6 +21,9 @@ interface AppDao {
 
     @Update
     suspend fun update(tempLog: TempLog)
+
+    @Delete
+    suspend fun delete(tempLog: TempLog)
 
     @Query("SELECT * FROM fever ORDER BY datetime(dateCreated) DESC")
     fun getAllFevers(): Flow<List<Fever>>

@@ -9,4 +9,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="chart_marker_bg_color">#000000</color>
     <color name="chart_marker_text_color">#FFFFFF</color>
+    <color name="failure">#c42021</color>
 </resources>

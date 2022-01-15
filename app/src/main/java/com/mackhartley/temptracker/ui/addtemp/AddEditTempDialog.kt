@@ -1,9 +1,11 @@
 package com.mackhartley.temptracker.ui.addtemp
 
+import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
@@ -70,12 +72,36 @@ class AddEditTempDialog : DialogFragment(),
 
         val buttonLabel = getPositiveButtonLabel()
 
-        return builder
+        val dialogBuilder = builder
             .setTitle(getString(R.string.record_temperature))
             .setPositiveButton(buttonLabel) {_, _ -> addNewTemp()}
             .setNegativeButton(getString(R.string.cancel), null)
             .setView(newBinding.root)
-            .create()
+
+        if (!isNewLog()) dialogBuilder.setNeutralButton("Delete", null)
+
+        val dialog = dialogBuilder.create()
+
+        dialog.setOnShowListener {
+            if (!isNewLog()) {
+                val neutralBtn = dialog.getButton(AlertDialog.BUTTON_NEUTRAL)
+                neutralBtn.setTextColor(ContextCompat.getColor(context, R.color.failure))
+                neutralBtn.setOnClickListener {
+                    MaterialAlertDialogBuilder(context)
+                        .setTitle(getString(R.string.delete_temperature))
+                        .setMessage(getString(R.string.are_you_sure_delete_temp))
+                        .setIcon(R.drawable.ic_warning)
+                        .setPositiveButton(getString(R.string.yes)) { _, _ ->
+                            val tempLogToDelete = args.tempLogToEdit
+                            if (tempLogToDelete != null) viewModel.deleteTemp(tempLogToDelete)
+                            dialog.dismiss()
+                        }
+                        .setNegativeButton(getString(R.string.no), null)
+                        .show()
+                }
+            }
+        }
+        return dialog
     }
 
     private fun getPositiveButtonLabel() =

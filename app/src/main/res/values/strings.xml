@@ -16,4 +16,8 @@
     <string name="measurements">Measurements</string>
     <string name="record_temperature">Record Temperature</string>
     <string name="insufficient_data">Insufficient Data</string>
+    <string name="delete_temperature">Delete Temperature</string>
+    <string name="are_you_sure_delete_temp">Are you sure you want to delete this temperature log?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 </resources>

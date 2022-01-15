@@ -3,7 +3,7 @@ x - Make graphs a bit bigger
 x - Add markers for graph
 
 x - Allow users to add temp from fever measurements screen
-Allow users to delete temps
+x - Allow users to delete temps
 
 Add formatting to always show 100.0, or show an extra decimal if user wants
 Add logic checking for the temp log dialog numbers

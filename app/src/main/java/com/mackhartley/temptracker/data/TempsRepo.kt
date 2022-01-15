@@ -18,4 +18,8 @@ class TempsRepo @Inject constructor(
     suspend fun updateTemp(tempLog: TempLog) {
         appDao.update(tempLog)
     }
+
+    suspend fun deleteTemp(tempLog: TempLog) {
+        appDao.delete(tempLog)
+    }
 }

@@ -39,4 +39,12 @@ class AddEditTempViewModel @Inject constructor(
             tempsRepo.updateTemp(tempLogToUpdate)
         }
     }
+
+    fun deleteTemp(
+        tempLogToDelete: TempLog
+    ) {
+        viewModelScope.launch {
+            tempsRepo.deleteTemp(tempLogToDelete)
+        }
+    }
 }
