@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -15,6 +16,8 @@ import com.mackhartley.temptracker.databinding.FragmentFeverHistoryBinding
 import com.mackhartley.temptracker.getAppComponent
 import com.mackhartley.temptracker.navigateTo
 import com.mackhartley.temptracker.ui.feverdetails.FeverDetailsFragmentArgs
+import com.mackhartley.temptracker.utils.exhaustive
+import kotlinx.coroutines.flow.collect
 import javax.inject.Inject
 
 class FeverHistoryFragment : Fragment(), TempAdapter.TempItemClickListener {
@@ -60,6 +63,9 @@ class FeverHistoryFragment : Fragment(), TempAdapter.TempItemClickListener {
                 }
                 adapter = tempAdapter
             }
+            it.addTempFab.setOnClickListener {
+                viewModel.addNewTemp(args.feverId)
+            }
         }
     }
 
@@ -67,6 +73,17 @@ class FeverHistoryFragment : Fragment(), TempAdapter.TempItemClickListener {
         viewModel.uiState.observe(viewLifecycleOwner) { state ->
             binding?.let {
                 tempAdapter.submitList(state.temps)
+            }
+        }
+
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            viewModel.uiEvent.collect { newUiEvent ->
+                when (newUiEvent) {
+                    is FeverHistoryUIEvent.NavigateToAddEditTempUI -> {
+                        val action = FeverHistoryFragmentDirections.actionFeverHistoryFragmentToAddEditTempDialog(newUiEvent.feverId, null)
+                        navigateTo(action)
+                    }
+                }.exhaustive
             }
         }
 

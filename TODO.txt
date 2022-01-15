@@ -2,14 +2,12 @@ x - Make better x axis label for graph
 x - Make graphs a bit bigger
 x - Add markers for graph
 
-Figure out better scale for graph
-Update graph styles
+x - Allow users to add temp from fever measurements screen
+Allow users to delete temps
 
-Update empty state view for measrements screen
-Allow users to add temp from fever measurements screen
 Add formatting to always show 100.0, or show an extra decimal if user wants
 Add logic checking for the temp log dialog numbers
-If user adds a temp of 0, the chart y range is 0. Fix that
+
 Entry, "Fever on 1/13/22" has a bug on the chart. Fix that
 
 Add settings menu
@@ -18,11 +16,19 @@ add setting to change C/F(have Class that can be injected places and it has a de
 
 Update darkmode/lightmode coloring
 Update date/time picker colors
+==============================
+
+
+Figure out better scale for graph
+Update graph styles
+If user adds a temp of 0, the chart y range is 0. Fix that
+
+Update empty state view for measrements screen
 
 Add ability to change date/time range
 
-Add ability to delete temp logs
-Add ability to edit or delete fevers
+Add ability to edit fevers
+Ability to delete fevers
 
 Color Measurement cards based on fever severity
 Color Fever char temps based on severity
